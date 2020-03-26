@@ -1,30 +1,24 @@
 <template>
     <Page class="page">
-        <ActionBar class="action-bar">
-            <!-- 
-            Use the NavigationButton as a side-drawer button in Android
-            because ActionItems are shown on the right side of the ActionBar
-            -->
-            <NavigationButton ios:visibility="collapsed" icon="res://menu" @tap="onDrawerButtonTap"></NavigationButton>
-            <!-- 
-            Use the ActionItem for IOS with position set to left. Using the
-            NavigationButton as a side-drawer button in iOS is not possible,
-            because its function is to always navigate back in the application.
-            -->
-            <ActionItem icon="res://menu" 
-                android:visibility="collapsed" 
-                @tap="onDrawerButtonTap"
-                ios.position="left">
-            </ActionItem>
-            <Label class="action-bar-title" text="Home"></Label>
-        </ActionBar>
-
-        <GridLayout class="page__content">
+                <StackLayout  class="page__content">
           
-           <Label> Welcome </Label>
+                    <Image style="margin-bottom:50;" src="~/assets/StopGap-Logo.png"/>
+
+                    <Label style="font-weight: 700; font-size: 30;" > Login </Label>
+                    <TextField  v-model="textFieldValue" hint="Username" />
+                    <TextField v-model="textFieldValue" hint="Password" />
+                    <Button text="Login" @tap="loginButtonTap" />                   
+                  <GridLayout columns="*,*">
+                    <Button  row="0" col="0" text="Register" @tap="registerButtonTap" />
+                    <Button row="0" col="1" text="Forgot Password" @tap="forgotPasswordButtonTap" />
+                  </GridLayout>
+                    
+                    
 
 
-        </GridLayout>
+
+
+        </StackLayout >
 
     </Page>
 </template>
@@ -32,10 +26,19 @@
 <script>
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
+    import Featured from "./Featured";
+    import RegisterType from "./RegisterType";
 
     export default {
         mounted() {
             SelectedPageService.getInstance().updateSelectedPage("Home");
+        },
+        data () {
+            return {
+                RegisterType: RegisterType,
+                Featured: Featured,
+                selectedPage: ""
+            };
         },
         computed: {
             message() {
@@ -43,9 +46,23 @@
             }
         },
         methods: {
-            onDrawerButtonTap() {
-                utils.showDrawer();
+            onButtonTap() {
+                console.log("Button was pressed");                         
+            },
+            loginButtonTap() {
+                console.log("Login Button was pressed");    
+                this.$navigateTo(Featured);                    
+            },
+            registerButtonTap() {
+                console.log("Register Button was pressed");    
+                this.$navigateTo(RegisterType);                    
+               
+            },
+            forgotPasswordButtonTap() {
+                console.log("Forgot Password Button was pressed");                         
             }
+
+            
         }
     };
 </script>
