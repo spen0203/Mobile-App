@@ -63,6 +63,7 @@
             continueButtonTap() {
                 console.log("Save was pressed");   
                // this.$navigateTo(Home);        
+
             },
             selectPicture() {
 
