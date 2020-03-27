@@ -41,9 +41,7 @@
 
 <script>
     import Home from "./Home";
-    import Browse from "./Browse";
     import Featured from "./Featured";
-    import Search from "./Search";
     import Settings from "./Settings";
     import * as utils from "~/shared/utils";
     import SelectedPageService from "~/shared/selected-page-service";    
@@ -56,18 +54,14 @@
         data () {
             return {
                 Home: Home,
-                Browse: Browse,
                 Featured: Featured,
-                Search: Search,
                 Settings: Settings,
                 selectedPage: ""
             };
         },
         components: {
             Home,
-            Browse,
             Featured,
-            Search,
             Settings
         },
         methods: {

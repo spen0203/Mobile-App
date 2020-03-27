@@ -1,24 +1,17 @@
 <template>
     <Page class="page">
         <StackLayout  class="page__content">       
-            <label class="formHeader" >Address Information: </label>                     
-            <TextField  v-model="textFieldValue" hint="Property Nickname" />
-            <TextField  v-model="textFieldValue" hint="Street Address" />
-            <TextField  v-model="textFieldValue" hint="Country" />
-            <TextField  v-model="textFieldValue" hint="City" />
-            <TextField  v-model="textFieldValue" hint="Province" />
-            <TextField  v-model="textFieldValue" hint="Postal Code" />
-
-            <label class="formHeader" >Notes: </label>                     
-            <TextView editable="true" hint="Enter any extra notes about your property.">
-
-            </TextView>
-
-                <label class="formHeader" >Home Details: </label>                     
+            <label class="formHeader" >Account Information: </label>                     
+            <TextField  v-model="textFieldValue" hint="Email" />
+            <TextField  v-model="textFieldValue" hint="Password" />
+            <TextField  v-model="textFieldValue" hint="Confirm Password" />
+            <TextField  v-model="textFieldValue" hint="First Name" />
+            <TextField  v-model="textFieldValue" hint="Last Name" />
+            <TextField  v-model="textFieldValue" hint="Phone Number" />
 
             <GridLayout columns="*,2*" rows="50">
-                <Switch row="0" col="0" checked="true"/> 
-                <label row="0" col="1" > Default Address</label>
+                <Switch row="0" col="0" checked="false"/> 
+                <label row="0" col="1" > Agree To Terms and Conditions</label>
             </GridLayout>
 
             <Button style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
@@ -32,15 +25,16 @@
 <script>
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
-    import PaymentForm from "./PaymentForm";
+    import AddressForm from "./AddressForm";
+import PublicProviderProfile from './PublicProviderProfile';
 
     export default {
         mounted() {
-            SelectedPageService.getInstance().updateSelectedPage("AddressForm");
+            SelectedPageService.getInstance().updateSelectedPage("PublicProviderAccountForm");
         },
         data () {
             return {
-                PaymentForm: PaymentForm,
+                PublicProviderProfile: PublicProviderProfile,
                 selectedPage: ""
             };
         },
@@ -52,7 +46,7 @@
         methods: {
             continueButtonTap() {
                 console.log("Continue was pressed");   
-                this.$navigateTo(PaymentForm);                    
+                this.$navigateTo(PublicProviderProfile);                    
              
             },
            

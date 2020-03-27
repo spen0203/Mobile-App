@@ -13,11 +13,6 @@
                     <Button row="0" col="1" text="Forgot Password" @tap="forgotPasswordButtonTap" />
                   </GridLayout>
                     
-                    
-
-
-
-
         </StackLayout >
 
     </Page>
@@ -26,7 +21,7 @@
 <script>
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
-    import Featured from "./Featured";
+    import RequestService from "./RequestService";
     import RegisterType from "./RegisterType";
 
     export default {
@@ -36,7 +31,7 @@
         data () {
             return {
                 RegisterType: RegisterType,
-                Featured: Featured,
+                RequestService: RequestService,
                 selectedPage: ""
             };
         },
@@ -51,12 +46,11 @@
             },
             loginButtonTap() {
                 console.log("Login Button was pressed");    
-                this.$navigateTo(Featured);                    
+                this.$navigateTo(RequestService);                    
             },
             registerButtonTap() {
                 console.log("Register Button was pressed");    
-                this.$navigateTo(RegisterType);                    
-               
+                this.$navigateTo(RegisterType);                           
             },
             forgotPasswordButtonTap() {
                 console.log("Forgot Password Button was pressed");                         

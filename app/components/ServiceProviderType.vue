@@ -1,8 +1,8 @@
 <template>
     <Page class="page">
         <StackLayout  class="page__content">                            
-            <Button text="Customer" @tap="customerButtonTap" />
-            <Button text="Service Provider" @tap="serviceProviderButtonTap" />
+            <Button text="Public Provider" @tap="PublicProviderButtonTap" />
+            <Button text="Company Provider" @tap="CompanyProviderButtonTap" />
         </StackLayout >
 
     </Page>
@@ -11,16 +11,15 @@
 <script>
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
-    import AccountForm from "./AccountForm";
-    import ServiceProviderType from "./ServiceProviderType";
+    import PublicProviderAccountForm from "./PublicProviderAccountForm";
 
     export default {
         mounted() {
-            SelectedPageService.getInstance().updateSelectedPage("RegisterType");
+            SelectedPageService.getInstance().updateSelectedPage("ServiceProviderType");
         },
         data () {
             return {
-               ServiceProviderType: ServiceProviderType
+               PublicProviderAccountForm: PublicProviderAccountForm
             };
         },
         computed: {
@@ -32,13 +31,13 @@
             onButtonTap() {
                 console.log("Button was pressed");                         
             },
-            customerButtonTap() {
-                console.log("Customer Button was pressed");    
-                this.$navigateTo(AccountForm);                    
+            CompanyProviderButtonTap() {
+                console.log("Company Provider Button was pressed");    
+                //this.$navigateTo(AccountForm);                    
             },
-            serviceProviderButtonTap() {
-                console.log("Service Provider Button was pressed");    
-                this.$navigateTo(ServiceProviderType);                    
+            PublicProviderButtonTap() {
+                console.log("Public Provider Button was pressed");    
+                this.$navigateTo(PublicProviderAccountForm);                    
             },         
         }
     };
