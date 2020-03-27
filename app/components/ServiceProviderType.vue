@@ -12,6 +12,7 @@
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
     import PublicProviderAccountForm from "./PublicProviderAccountForm";
+    import CompanyProviderAccountForm from "./CompanyProviderAccountForm";
 
     export default {
         mounted() {
@@ -19,7 +20,8 @@
         },
         data () {
             return {
-               PublicProviderAccountForm: PublicProviderAccountForm
+               PublicProviderAccountForm: PublicProviderAccountForm,
+               CompanyProviderAccountForm: CompanyProviderAccountForm,
             };
         },
         computed: {
@@ -33,7 +35,7 @@
             },
             CompanyProviderButtonTap() {
                 console.log("Company Provider Button was pressed");    
-                //this.$navigateTo(AccountForm);                    
+                this.$navigateTo(CompanyProviderAccountForm);                    
             },
             PublicProviderButtonTap() {
                 console.log("Public Provider Button was pressed");    

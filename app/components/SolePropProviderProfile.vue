@@ -1,27 +1,33 @@
 <template>
     <Page class="page">
-        <StackLayout  class="page__content">       
-            <label class="formHeader" >Bank Deposit Information: </label>                     
-            <TextField  v-model="textFieldValue" hint="Account Number" />
-            <TextField  v-model="textFieldValue" hint="Institution Number" />
-            <TextField  v-model="textFieldValue" hint="Branch Number" />
- 
-             <label class="formHeader" >Profile Photo: </label>                     
-            <WrapLayout>
-                <Image  v-if="!img" width="75" height="75" class="nt-drawer__header-image fas t-36" src.decode="font://&#xf2bd;"></Image>
-                <Image v-if="img" :src="img.src" width="75" height="75" />
-			</WrapLayout>
+        <ScrollView>
+            <StackLayout  class="page__content">       
+                <label class="formHeader" >Company Information: </label>                     
+                <TextField  v-model="textFieldValue" hint="City License  Number" />
+                <TextField  v-model="textFieldValue" hint="License Plate Number" />
+    
+                <label class="formHeader" >Bank Deposit Information: </label>                     
+                <TextField  v-model="textFieldValue" hint="Account Number" />
+                <TextField  v-model="textFieldValue" hint="Institution Number" />
+                <TextField  v-model="textFieldValue" hint="Branch Number" />
+    
 
-            <GridLayout columns="*,*">
-                    <Button  row="0" col="0" text="Take Photo" @tap="takePicture" />
-                    <Button row="0" col="1" text="Gallery" @tap="selectPicture" />
-            </GridLayout>
+                <label class="formHeader" >Profile Photo: </label>                     
+                <WrapLayout>
+                    <Image v-if="img" :src="img.src" width="75" height="75" />
+                    <Image  v-if="!img" width="75" height="75" class="nt-drawer__header-image fas t-36" src.decode="font://&#xf2bd;"></Image>
 
-            <Button style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
+                </WrapLayout>
+                <GridLayout columns="*,*">
+                        <Button  row="0" col="0" text="Take Photo" @tap="takePicture" />
+                        <Button row="0" col="1" text="Gallery" @tap="selectPicture" />
+                </GridLayout>
+
+                <Button style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
 
 
-        </StackLayout >
-
+            </StackLayout >
+        </ScrollView>
     </Page>
 </template>
 
@@ -61,7 +67,7 @@
             },
             continueButtonTap() {
                 console.log("Save was pressed");   
-                this.$navigateTo(Home);        
+               // this.$navigateTo(Home);        
             },
             selectPicture() {
 

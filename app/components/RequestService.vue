@@ -21,6 +21,8 @@
 
         <StackLayout  class="page__content">                            
 
+            
+            <Button style="color:white; background-color:red; font-weight:800; border-radius:15px;" text="Request Service" @tap="continueButtonTap" />                   
         </StackLayout >
     </Page>
 </template>
