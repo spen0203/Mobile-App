@@ -1,9 +1,10 @@
 <template>
-    <Page class="page">
-        <StackLayout  class="page__content">                            
-            <Button text="Customer" @tap="customerButtonTap" />
-            <Button text="Service Provider" @tap="serviceProviderButtonTap" />
-        </StackLayout >
+    <Page class="page" style="background-color:#989a9c;">
+        <GridLayout rows="*, *, *, *, *" columns="*" class="page__content">    
+            <Button row="1" col="0" text.decode="&#xf015; Customer "  @tap="customerButtonTap" class="nt-icon fas typeButton" />
+
+            <Button row="3" col="0" text.decode="&#xf1e6; Service Provider " @tap="serviceProviderButtonTap" class="nt-icon fas typeButton" />
+        </GridLayout>
 
     </Page>
 </template>
@@ -48,6 +49,17 @@
     // Start custom common variables
     @import '~@nativescript/theme/scss/variables/blue';
     // End custom common variables
+    .typeButton {
+        background-color:#3f3f40;
+        color:white;
+        font-weight:700;
+        font-size:20px;
+        margin-left:50px;
+        margin-right:50px;
+    }
 
+    .typeButton a {
+        color:white;
+    }
     // Custom styles
 </style>

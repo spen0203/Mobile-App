@@ -19,11 +19,27 @@
             <Label class="action-bar-title" text="StopGapTPM"></Label>
         </ActionBar>
 
-        <StackLayout  class="page__content">                            
+        <DockLayout stretchLastChild="true" class="page__content">                            
+                    
+                    <Button dock="bottom" style="color:white; background-color:red; font-weight:800; border-radius:15px;" text="Request Service"  />                   
 
+                    <Mapbox
+                        accessToken="pk.eyJ1IjoicGxheWVyM2MiLCJhIjoiY2s4YWhsdnBhMGkxcTNrcG02YjkwZHZteCJ9.rOMXwXk61oEJ3oEhfHVwkw"
+                        mapStyle="traffic_day"
+                        latitude="45.382750"
+                        longitude="-75.693839"
+                        hideCompass="true"
+                        zoomLevel="9"
+                        showUserLocation="false"
+                        disableZoom="false"
+                        disableRotation="false"
+                        disableScroll="false"
+                        disableTilt="false" 
+                        attributionControl="false"
+                        dock="center"
+                        />
             
-            <Button style="color:white; background-color:red; font-weight:800; border-radius:15px;" text="Request Service" @tap="continueButtonTap" />                   
-        </StackLayout >
+        </DockLayout>
     </Page>
 </template>
 
@@ -31,14 +47,13 @@
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
     import AccountForm from "./AccountForm";
-
     export default {
         mounted() {
             SelectedPageService.getInstance().updateSelectedPage("RequestService");
         },
         data () {
             return {
-               AccountForm: AccountForm
+               AccountForm: AccountForm,
             };
         },
         computed: {
@@ -52,7 +67,8 @@
             },
             onDrawerButtonTap() {
                 utils.showDrawer();
-            }
+            },
+            
                     
         }
     };
@@ -62,6 +78,5 @@
     // Start custom common variables
     @import '~@nativescript/theme/scss/variables/blue';
     // End custom common variables
-
     // Custom styles
 </style>

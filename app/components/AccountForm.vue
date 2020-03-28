@@ -1,23 +1,23 @@
 <template>
     <Page class="page">
-        <StackLayout  class="page__content">       
-            <label class="formHeader" >Account Information: </label>                     
-            <TextField  v-model="textFieldValue" hint="Email" />
-            <TextField  v-model="textFieldValue" hint="Password" />
-            <TextField  v-model="textFieldValue" hint="Confirm Password" />
-            <TextField  v-model="textFieldValue" hint="First Name" />
-            <TextField  v-model="textFieldValue" hint="Last Name" />
-            <TextField  v-model="textFieldValue" hint="Phone Number" />
+        <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*" class="page__content">       
+            <label row="0" class="formHeader" >Account Information: </label>                     
+            <TextField row="1" v-model="textFieldValue" hint="Email" class="formField"/>
+            <TextField row="2" v-model="textFieldValue" hint="Password" class="formField"/>
+            <TextField row="3" v-model="textFieldValue" hint="Confirm Password" class="formField"/>
+            <TextField row="4" v-model="textFieldValue" hint="First Name" class="formField"/>
+            <TextField row="5" v-model="textFieldValue" hint="Last Name" class="formField"/>
+            <TextField row="6" v-model="textFieldValue" hint="Phone Number" class="formField"/>
 
-            <GridLayout columns="*,2*" rows="50">
-                <Switch row="0" col="0" checked="false"/> 
-                <label row="0" col="1" > Agree To Terms and Conditions</label>
+            <GridLayout row="7" columns="*,2*" rows="50">
+                <Switch row="0" col="0" checked="false" /> 
+                <label row="0" col="1" class="formField"> Agree To Terms and Conditions</label>
             </GridLayout>
 
-            <Button style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
+            <Button row="9" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
 
 
-        </StackLayout >
+        </GridLayout >
 
     </Page>
 </template>
@@ -62,6 +62,11 @@
     .formHeader {
         font-weight: 700; 
         font-size: 20;
+    }
+
+    .formField {
+        font-size:15;
+        font-weight:500;
     }
     // Custom styles
 </style>

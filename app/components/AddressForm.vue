@@ -1,31 +1,31 @@
 <template>
     <Page class="page">
-        <StackLayout  class="page__content">       
-            <label class="formHeader" >Address Information: </label>                     
-            <TextField  v-model="textFieldValue" hint="Property Nickname" />
-            <TextField  v-model="textFieldValue" hint="Street Address" />
-            <TextField  v-model="textFieldValue" hint="Country" />
-            <TextField  v-model="textFieldValue" hint="City" />
-            <TextField  v-model="textFieldValue" hint="Province" />
-            <TextField  v-model="textFieldValue" hint="Postal Code" />
+            <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*" class="page__content">       
+                <label row="0" class="formHeader" >Address Information: </label>                     
+                <TextField row="1" v-model="textFieldValue" hint="Property Nickname" />
+                <TextField row="2" v-model="textFieldValue" hint="Street Address" />
+                <TextField row="3" v-model="textFieldValue" hint="Country" />
+                <TextField row="4" v-model="textFieldValue" hint="City" />
+                <TextField row="5" v-model="textFieldValue" hint="Province" />
+                <TextField row="6" v-model="textFieldValue" hint="Postal Code" />
 
-            <label class="formHeader" >Notes: </label>                     
-            <TextView editable="true" hint="Enter any extra notes about your property.">
+                <label row="7" class="formHeader" >Notes: </label>                     
+                <TextView row="8" editable="true" hint="Enter any extra notes about your property.">
 
-            </TextView>
+                </TextView>
 
-                <label class="formHeader" >Home Details: </label>                     
+                    <label row="10" class="formHeader" >Home Details: </label>                     
 
-            <GridLayout columns="*,2*" rows="50">
-                <Switch row="0" col="0" checked="true"/> 
-                <label row="0" col="1" > Default Address</label>
-            </GridLayout>
+                <GridLayout row="11" columns="*,2*" rows="50">
+                    <Switch row="0" col="0" checked="true"/> 
+                    <label row="0" col="1" > Default Address</label>
+                </GridLayout>
 
-            <Button style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
+                <Button row="13" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
 
 
-        </StackLayout >
-
+            </GridLayout >
+        
     </Page>
 </template>
 
