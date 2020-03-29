@@ -1,41 +1,39 @@
 <template>
     <Page class="page">
         <ScrollView >
-            <StackLayout  class="page__content">       
-                <label class="formHeader" >Payment Information: </label>                     
-                <TextField  v-model="textFieldValue" hint="Payment Nickname" />
-                <TextField  v-model="textFieldValue" hint="Account Number" />
-                <TextField  v-model="textFieldValue" hint="Account Expiry" />
-                <TextField  v-model="textFieldValue" hint="Security Code" />
-                
-                <label class="formHeader">Billing Address </label>
-                <GridLayout columns="*,2*">
-                    <Switch row="0" col="0" v-model="useDefaultAddress"/> 
-                    <label row="0" col="1" > Use Default Address</label>
+            <StackLayout  class="page__content"> 
+                <GridLayout rows="*,*,*,*,*" columns="*">
+                    <label row="0" class="formHeader" >Payment Information: </label>                     
+                    <TextField row="1" v-model="textFieldValue" hint="Payment Nickname" class="formField form" />
+                    <TextField row="2" v-model="textFieldValue" hint="Account Number" class="formField form"  />
+                    <TextField row="3" v-model="textFieldValue" hint="Account Expiry" class="formField form" />
+                    <TextField row="4" v-model="textFieldValue" hint="Security Code" class="formField form" />
                 </GridLayout>
-                <StackLayout v-if="!useDefaultAddress" style="margin:0px;">
-
-
-                    <TextField  v-model="textFieldValue" hint="Street Address" />
-                    <TextField  v-model="textFieldValue" hint="Country" />
-                    <TextField  v-model="textFieldValue" hint="City" />
-                    <TextField  v-model="textFieldValue" hint="Province" />
-                    <TextField  v-model="textFieldValue" hint="Postal Code" />
-
-
-
-                </StackLayout>
-                <label class="formHeader" >Notes: </label>                     
-                <TextView editable="true" hint="Enter any extra notes about your Payment.">
-
-                </TextView>
-
-
-                <GridLayout columns="*,2*">
-                    <Switch row="0" col="0" checed="true"/> 
-                    <label row="0" col="1" >Save As Default Payment</label>
+                <GridLayout rows="*,*,*,*,*,*" columns="*">
+                    <label row="0" class="formHeader">Billing Address </label>
+                    <GridLayout row="1" columns="*,2*">
+                        <Switch row="0" col="0" v-model="useDefaultAddress"/> 
+                        <label row="0" col="1" class="formField" > Use Default Address</label>
+                    </GridLayout>
+                    <StackLayout row="2" v-if="!useDefaultAddress" style="margin:0px;">
+                        <TextField  v-model="textFieldValue" hint="Street Address" class="formField form" />
+                        <TextField  v-model="textFieldValue" hint="Country" class="formField form" />
+                        <TextField  v-model="textFieldValue" hint="City" class="formField form" />
+                        <TextField  v-model="textFieldValue" hint="Province" class="formField form" />
+                        <TextField  v-model="textFieldValue" hint="Postal Code" class="formField form" />
+                    </StackLayout>
+                    <StackLayout row="2" v-if="useDefaultAddress" style="margin:0px;">
+                        <TextField editable="false"  class="formDisable" />
+                        <TextField editable="false"  class="formDisable" />
+                        <TextField editable="false"  class="formDisable"/>
+                        <TextField editable="false"  class="formDisable" />
+                        <TextField editable="false"  class="formDisable" />
+                    </StackLayout>
+                    <GridLayout row="3" columns="*,2*">
+                        <Switch row="0" col="0" checed="true"/> 
+                        <label row="0" col="1" class="formField" >Save As Default Payment</label>
+                    </GridLayout>  
                 </GridLayout>
-
 
             <Button style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
 
@@ -85,6 +83,11 @@
     .formHeader {
         font-weight: 700; 
         font-size: 20;
+    }
+
+    .formField {
+        font-size:15;
+        font-weight:500;
     }
     // Custom styles
 </style>

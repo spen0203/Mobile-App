@@ -53,9 +53,12 @@
         background-color:#3f3f40;
         color:white;
         font-weight:700;
-        font-size:20px;
+        font-size:25px;
         margin-left:50px;
         margin-right:50px;
+        height:75;
+        border-color:white;
+        border-width:5px;
     }
 
     .typeButton a {

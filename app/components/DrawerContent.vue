@@ -104,7 +104,7 @@
 
 <style scoped lang="scss">
     // Start custom common variables
-    @import '~@nativescript/theme/scss/variables/blue';
+    @import '~@nativescript/theme/scss/variables/orange';
     // End custom common variables
 
     // Custom styles

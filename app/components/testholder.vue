@@ -1,26 +1,26 @@
 <template>
     <Page class="page">
-            <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*,*,*,*" class="page__content">       
+        <GridLayout columns="*" rows="*,*,*,*,*,*,*,*" class="page__content">       
+                
                 <label row="0" class="formHeader" >Company Information: </label>                     
-                <TextField row="1" v-model="textFieldValue" hint="License Number" class="formField form"/>
-                <TextField row="2" v-model="textFieldValue" hint="Company Name" class="formField form"/>
+                <TextField row="1" v-model="textFieldValue" hint="License  Number" class="formField form" />
+                <TextField row="2" v-model="textFieldValue" hint="Company Name" class="formField form" />
     
-            
-
-                <label row="5" class="formHeader" >Profile Photo: </label>                     
-                <GridLayout row="6" columns="*,*,*" rows="*">
-                    <Image style="height:100; width:100;" column="1" class="nt-drawer__header-image fas  " v-if="!img"  src.decode="font://&#xf2bd;" ></Image>
-                    <Image style="height:100; width:100;" column="1"  v-if="img" :src="img.src"  />
+                <label row="3" class="formHeader" >Profile Photo: </label>                     
+                <GridLayout row="4" columns="*,*,*" rows="*">
+                    <Image style="height:100; width:100;" column="1" class="nt-drawer__header-image fas  "  v-if="!img"  src.decode="font://&#xf2bd;" ></Image>
+                    <Image column="1"  v-if="img" :src="img.src"  />
 			    </GridLayout>
-                <GridLayout row="7" columns="*,*">
-                        <Button  row="0" col="0" text="Take Photo" @tap="takePicture" />
-                        <Button row="0" col="1" text="Gallery" @tap="selectPicture" />
+
+                <GridLayout row="5" columns="*,*">
+                        <Button  row="0" col="0" text="Take Photo" @tap="takePicture" class="formField form" />
+                        <Button row="0" col="1" text="Gallery" @tap="selectPicture" class="formField form" />
                 </GridLayout>
 
-                <Button row="11"  style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
+                <Button row="7" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
 
 
-            </GridLayout >
+            </GridLayout>
     </Page>
 </template>
 
@@ -115,5 +115,11 @@
         font-weight: 700; 
         font-size: 20;
     }
+
+    .formField form {
+        font-size:15;
+        font-weight:500;
+    }
+
     // Custom styles
 </style>

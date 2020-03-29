@@ -1,33 +1,30 @@
 <template>
     <Page class="page">
-        <ScrollView>
-            <StackLayout  class="page__content">       
-                <label class="formHeader" >Company Information: </label>                     
-                <TextField  v-model="textFieldValue" hint="City License  Number" />
-                <TextField  v-model="textFieldValue" hint="License Plate Number" />
+            <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*,*,*,*" class="page__content">       
+                <label row="0" class="formHeader" >Company Information: </label>                     
+                <TextField row="1" v-model="textFieldValue" hint="City License  Number" class="formField form"/>
+                <TextField row="2" v-model="textFieldValue" hint="License Plate Number" class="formField form"/>
     
-                <label class="formHeader" >Bank Deposit Information: </label>                     
-                <TextField  v-model="textFieldValue" hint="Account Number" />
-                <TextField  v-model="textFieldValue" hint="Institution Number" />
-                <TextField  v-model="textFieldValue" hint="Branch Number" />
+                <label row="3" class="formHeader" >Bank Deposit Information: </label>                     
+                <TextField row="4" v-model="textFieldValue" hint="Account Number" class="formField form"/>
+                <TextField row="5" v-model="textFieldValue" hint="Institution Number" class="formField form" />
+                <TextField row="6" v-model="textFieldValue" hint="Branch Number" class="formField form"/>
     
 
-                <label class="formHeader" >Profile Photo: </label>                     
-                <WrapLayout>
-                    <Image v-if="img" :src="img.src" width="75" height="75" />
-                    <Image  v-if="!img" width="75" height="75" class="nt-drawer__header-image fas t-36" src.decode="font://&#xf2bd;"></Image>
-
-                </WrapLayout>
-                <GridLayout columns="*,*">
+                <label row="7" class="formHeader" >Profile Photo: </label>                     
+                <GridLayout row="8" columns="*,*,*" rows="*">
+                    <Image style="height:100; width:100;" column="1" class="nt-drawer__header-image fas  " v-if="!img"  src.decode="font://&#xf2bd;" ></Image>
+                    <Image style="height:100; width:100;" column="1"  v-if="img" :src="img.src"  />
+			    </GridLayout>
+                <GridLayout row="9" columns="*,*">
                         <Button  row="0" col="0" text="Take Photo" @tap="takePicture" />
                         <Button row="0" col="1" text="Gallery" @tap="selectPicture" />
                 </GridLayout>
 
-                <Button style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
+                <Button row="11"  style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
 
 
-            </StackLayout >
-        </ScrollView>
+            </GridLayout >
     </Page>
 </template>
 

@@ -1,6 +1,6 @@
 <template lang="html">
-  <RadSideDrawer ref="drawer" drawerLocation="Left" gesturesEnabled="true" :drawerTransition="transition">
-    <StackLayout ~drawerContent backgroundColor="#ffffff">
+  <RadSideDrawer ref="drawer" drawerLocation="Left" gesturesEnabled="false" :drawerTransition="transition">
+    <StackLayout ~drawerContent backgroundColor="#989a9c">
       <slot name="drawerContent"></slot>
     </StackLayout>
     <Frame ~mainContent ref="drawerMainContent">

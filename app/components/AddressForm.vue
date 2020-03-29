@@ -2,15 +2,15 @@
     <Page class="page">
             <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*" class="page__content">       
                 <label row="0" class="formHeader" >Address Information: </label>                     
-                <TextField row="1" v-model="textFieldValue" hint="Property Nickname" />
-                <TextField row="2" v-model="textFieldValue" hint="Street Address" />
-                <TextField row="3" v-model="textFieldValue" hint="Country" />
-                <TextField row="4" v-model="textFieldValue" hint="City" />
-                <TextField row="5" v-model="textFieldValue" hint="Province" />
-                <TextField row="6" v-model="textFieldValue" hint="Postal Code" />
+                <TextField row="1" v-model="textFieldValue" hint="Property Nickname" class="formField form"/>
+                <TextField row="2" v-model="textFieldValue" hint="Street Address" class="formField form"/>
+                <TextField row="3" v-model="textFieldValue" hint="Country" class="formField form" />
+                <TextField row="4" v-model="textFieldValue" hint="City" class="formField form"/>
+                <TextField row="5" v-model="textFieldValue" hint="Province" class="formField form"/>
+                <TextField row="6" v-model="textFieldValue" hint="Postal Code" class="formField form" />
 
                 <label row="7" class="formHeader" >Notes: </label>                     
-                <TextView row="8" editable="true" hint="Enter any extra notes about your property.">
+                <TextView row="8" editable="true" hint="Enter any extra notes about your property." class="formField form" >
 
                 </TextView>
 
@@ -18,7 +18,7 @@
 
                 <GridLayout row="11" columns="*,2*" rows="50">
                     <Switch row="0" col="0" checked="true"/> 
-                    <label row="0" col="1" > Default Address</label>
+                    <label row="0" col="1" class="formField" > Default Address</label>
                 </GridLayout>
 
                 <Button row="13" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
@@ -69,6 +69,11 @@
     .formHeader {
         font-weight: 700; 
         font-size: 20;
+    }
+
+    .formField {
+        font-size:15;
+        font-weight:500;
     }
     // Custom styles
 </style>

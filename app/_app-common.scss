@@ -1,5 +1,6 @@
 @import "~@nativescript/theme/core";
 @import "~@nativescript/theme/blue";
+@import "~@nativescript/theme/orange";
 
 // Place any CSS rules you want to apply on both iOS and Android here.
 // This is where the vast majority of your CSS code goes.
@@ -20,7 +21,27 @@
     font-weight: 400;
 }
 
+.form {
+    border-color:#ffffff;
+    background-color:#d2d4d6;
+    padding:10;
+    font-weight:600;
+}
+
+.formDisable {
+    background-color: #989a9c!important;
+    color: #989a9c!important;
+    border-color: #989a9c!important;
+    padding:10;
+    font-weight:600;
+    opacity: 0;
+}
 // Common page class
+.page {
+    background-color: #989a9c;
+}
+
+
 .page__content {
     &-icon,
     &-placeholder {
