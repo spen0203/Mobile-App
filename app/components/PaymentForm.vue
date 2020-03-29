@@ -12,7 +12,8 @@
                 <GridLayout rows="*,*,*,*,*,*" columns="*">
                     <label row="0" class="formHeader">Billing Address </label>
                     <GridLayout row="1" columns="*,2*">
-                        <Switch row="0" col="0" v-model="useDefaultAddress"/> 
+          
+                        <Switch row="0" col="0" v-model="useDefaultAddress" color="#505250" backgroundColor="#f68f25" /> 
                         <label row="0" col="1" class="formField" > Use Default Address</label>
                     </GridLayout>
                     <StackLayout row="2" v-if="!useDefaultAddress" style="margin:0px;">
@@ -30,7 +31,7 @@
                         <TextField editable="false"  class="formDisable" />
                     </StackLayout>
                     <GridLayout row="3" columns="*,2*">
-                        <Switch row="0" col="0" checed="true"/> 
+                              <Switch row="0" col="0" checked="false" color="#505250" backgroundColor="#f68f25"  /> 
                         <label row="0" col="1" class="formField" >Save As Default Payment</label>
                     </GridLayout>  
                 </GridLayout>

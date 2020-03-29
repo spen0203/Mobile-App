@@ -1,7 +1,7 @@
 <template>
     <Page class="page">
             <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*,*,*,*" class="page__content">       
-                <label row="0" class="formHeader" >Company Information: </label>                     
+                <label row="0" class="formHeader" >Corporation Information: </label>                     
                 <TextField row="1" v-model="textFieldValue" hint="License Number" class="formField form"/>
                 <TextField row="2" v-model="textFieldValue" hint="Company Name" class="formField form"/>
     

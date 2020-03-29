@@ -10,13 +10,19 @@
             <TextField row="6" v-model="textFieldValue" hint="Phone Number" class="formField form"/>
 
             <GridLayout row="7" columns="*,2*" rows="50">
-                <Switch row="0" col="0" checked="false"/> 
-                <label row="0" col="1" class="formField" @tap="$navigateTo(TermsAndConditions);"> Agree To terms and Conditions</label>
+                <Switch row="0" col="0" checked="false" color="#505250" backgroundColor="#f68f25"  /> 
+                <label row="0" col="1" class="formField" @tap="$navigateTo(TermsAndConditions);"> Agree To Terms and Conditions</label>
+            </GridLayout>
+            <label row="8" class="formHeader">Provider Type: </label>
+            
+            <GridLayout v-if="companyType == 1" row="9" columns="*,*" rows="50">
+                <Button row="0" col="0" class="formField form switchSelected switchButton" text="Corporation" @tap="companyType = 1;" />
+                <Button row="0" col="1" class="formField form switchUnselected switchButton" text="Sole Provider" @tap="companyType = 2;" />
             </GridLayout>
 
-            <GridLayout row="9" columns="*,*" rows="50">
-                <Button row="0" col="0" class="formField form" text="Corporation" />
-                <Button row="0" col="1" class="formField form" text="Sole Provider" @tap="switchCompanyType" />
+            <GridLayout v-if="companyType == 2" row="9" columns="*,*" rows="50">
+                <Button row="0" col="0" class="formField form switchUnselected switchButton" text="Corporation" @tap="companyType = 1;" />
+                <Button row="0" col="1" class="formField form switchSelected switchButton" text="Sole Provider" @tap="companyType = 2;" />
             </GridLayout>
 
             <Button row="11" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
@@ -44,6 +50,7 @@
                 SolePropProviderProfile: SolePropProviderProfile,
                 TermsAndConditions: TermsAndConditions,
                 selectedPage: "",
+                companyType: 1,
             };
         },
         computed: {
@@ -54,13 +61,22 @@
         methods: {
             continueButtonTap() {
                     console.log("Continue was pressed");   
-                //need an if for corp vs sole prop
-                this.$navigateTo(CompanyProviderProfile);                    
-                //this.$navigateTo(SolePropProviderProfile);                    
+                if(this.companyType == 1){ //Corportation
+                    this.$navigateTo(CompanyProviderProfile);                    
+                }
+                if(this.companyType == 2){//Sole Prop
+                    this.$navigateTo(SolePropProviderProfile);                    
+                }
             },
-            switchCompanyType() {
-                this.$navigateTo(SolePropProviderProfile);                    
+            switchCompanyType(type) {
 
+                if(type == 1){ //Corportation
+                companyType = 1;
+                }
+                if(type == 2){//Sole Prop
+                companyType = 2;
+                }
+              
             },
            
             
@@ -82,6 +98,24 @@
         font-size:15;
         font-weight:500;
     }
+
+    .switchButton {
+        margin-left:0;
+        margin-right: 0;
+    }
+
+    .switchSelected {
+        background-color: #f68f25;
+        color:black;
+        font-weight:700;
+        border-color:white;
+    }
+    
+    .switchUnselected {
+        background-color:#ffffff;
+        color:#8f8f8f;
+    }
+
 
     // Custom styles
 </style>

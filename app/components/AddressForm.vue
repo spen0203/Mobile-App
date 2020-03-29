@@ -17,7 +17,7 @@
                     <label row="10" class="formHeader" >Home Details: </label>                     
 
                 <GridLayout row="11" columns="*,2*" rows="50">
-                    <Switch row="0" col="0" checked="true"/> 
+                    <Switch row="0" col="0" checked="false" color="#505250" backgroundColor="#f68f25"  /> 
                     <label row="0" col="1" class="formField" > Default Address</label>
                 </GridLayout>
 

@@ -10,8 +10,8 @@
             <TextField row="6" v-model="textFieldValue" hint="Phone Number" class="formField form"/>
 
             <GridLayout row="7" columns="*,2*" rows="50">
-                <Switch row="0" col="0" checked="false"/> 
-                <label row="0" col="1" class="formField" @tap="$navigateTo(TermsAndConditions);"> Agree To terms and Conditions</label>
+                <Switch row="0" col="0" checked="false" color="#505250" backgroundColor="#f68f25"  /> 
+                <label row="0" col="1" class="formField" @tap="$navigateTo(TermsAndConditions);"> Agree To Terms and Conditions</label>
             </GridLayout>
 
             <Button row="9" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
