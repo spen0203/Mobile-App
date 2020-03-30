@@ -84,5 +84,8 @@
     // Start custom common variables
     @import '~@nativescript/theme/scss/variables/orange';
     // End custom common variables
+    .mapbox-ctrl-logo {
+        display: none!important;
+    }
     // Custom styles
 </style>
