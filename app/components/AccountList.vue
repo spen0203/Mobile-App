@@ -1,14 +1,19 @@
 <template>
     <Page class="page">
-        <StackLayout class="page__content">    
-            <label class="formHeader" > Job History: </label>  
-            <GridLayout rows="auto" columns="*,*,*,*,*">
-                <label col="1" class="formField"> Date </label>
-                <label col="2" class="formField"> Cost </label>
-                <label col="3" class="formField"> Location </label>
-            </GridLayout>   
-           
-        </StackLayout>
+        <GridLayout columns="*" rows="*,*,*,*,*,*,*,*" class="page__content">       
+            <label row="0" class="formHeader" >Account Information: </label>                     
+            <TextField row="1" v-model="textFieldValue" hint="Email" class="formField form"/>
+            <TextField row="2" v-model="textFieldValue" hint="Password" class="formField  form"/>
+            <TextField row="3" v-model="textFieldValue" hint="Confirm Password" class="formField form"/>
+            <TextField row="4" v-model="textFieldValue" hint="First Name" class="formField form"/>
+            <TextField row="5" v-model="textFieldValue" hint="Last Name" class="formField form"/>
+            <TextField row="6" v-model="textFieldValue" hint="Phone Number" class="formField form"/>
+
+            <Button row="8" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Save" @tap="continueButtonTap" />                   
+
+
+        </GridLayout >
+
     </Page>
 </template>
 

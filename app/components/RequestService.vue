@@ -21,9 +21,11 @@
 
         <DockLayout stretchLastChild="true" class="page__content">                            
                     
-                    <Button dock="bottom" style="color:white; background-color:red; font-weight:800; border-radius:15px;" text="Request Service"  />                   
+                    <Button dock="bottom" style="color:white; background-color:red; font-weight:800; border-radius:15px;" text="Request Service" @tap="requestService = 1;" />                   
 
-                    <Mapbox
+                    
+
+                    <Mapbox 
                         accessToken="pk.eyJ1IjoicGxheWVyM2MiLCJhIjoiY2s4YWhsdnBhMGkxcTNrcG02YjkwZHZteCJ9.rOMXwXk61oEJ3oEhfHVwkw"
                         mapStyle="traffic_day"
                         latitude="45.382750"
@@ -38,6 +40,9 @@
                         attributionControl="false"
                         dock="center"
                         />
+
+                    
+                        
             
         </DockLayout>
     </Page>
@@ -54,6 +59,7 @@
         data () {
             return {
                AccountForm: AccountForm,
+               
             };
         },
         computed: {

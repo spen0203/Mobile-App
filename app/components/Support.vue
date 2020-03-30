@@ -1,12 +1,8 @@
 <template>
     <Page class="page">
         <StackLayout class="page__content">    
-            <label class="formHeader" > Job History: </label>  
-            <GridLayout rows="auto" columns="*,*,*,*,*">
-                <label col="1" class="formField"> Date </label>
-                <label col="2" class="formField"> Cost </label>
-                <label col="3" class="formField"> Location </label>
-            </GridLayout>   
+            <label class="formHeader" > Support: </label>  
+            <label class="formField"> A sendgrid form will go here and connect to a stopgap email info@stopgaptpm.com </label>
            
         </StackLayout>
     </Page>
@@ -15,17 +11,13 @@
 <script>
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
-    import AddressForm from "./AddressForm";
-    import TermsAndConditions from "./TermsAndConditions";
 
     export default {
         mounted() {
-            SelectedPageService.getInstance().updateSelectedPage("AccountList");
+            SelectedPageService.getInstance().updateSelectedPage("Support");
         },
         data () {
             return {
-                AddressForm: AddressForm,
-                TermsAndConditions: TermsAndConditions,
                 selectedPage: ""
             };
         },

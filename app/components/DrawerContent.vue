@@ -8,22 +8,19 @@
         
             <ScrollView row="1" class="nt-drawer__body">
                 <StackLayout>
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Home' ? ' -selected': '')" @tap="onNavigationItemTap(Home)">
-                        <Label col="0" text.decode="&#xf015;" class="nt-icon fas"></Label>
-                        <Label col="1" text="Login Screen" class="p-r-10"></Label>
-                    </GridLayout>
+                    
 
 
 
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Account' ? ' -selected': '')" @tap="onNavigationItemTap(Account)">
+                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'AccountList' ? ' -selected': '')" @tap="onNavigationItemTap(AccountList)">
                         <Label col="0" text.decode="&#xf007;" class="nt-icon fas"></Label>
                         <Label col="1" text="Account" class="p-r-10"></Label>
                     </GridLayout>
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Payment' ? ' -selected': '')" @tap="onNavigationItemTap(Payment)">
+                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'PaymentList' ? ' -selected': '')" @tap="onNavigationItemTap(PaymentList)">
                         <Label col="0" text.decode="&#xf53d;" class="nt-icon fas"></Label>
                         <Label col="1" text="Payment" class="p-r-10"></Label>
                     </GridLayout>
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Address' ? ' -selected': '')" @tap="onNavigationItemTap(Address)">
+                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'AddressList' ? ' -selected': '')" @tap="onNavigationItemTap(AddressList)">
                         <Label col="0" text.decode="&#xf015;" class="nt-icon fas"></Label>
                         <Label col="1" text="Address" class="p-r-10"></Label>
                     </GridLayout>
@@ -31,18 +28,21 @@
                         <Label col="0" text.decode="&#xf274;" class="nt-icon fas"></Label>
                         <Label col="1" text="Job History" class="p-r-10"></Label>
                     </GridLayout>
-
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Featured' ? ' -selected': '')" @tap="onNavigationItemTap(Featured)">
-                        <Label col="0" text.decode="&#xf005;" class="nt-icon fas"></Label>
-                        <Label col="1" text="Featured" class="p-r-10"></Label>
+                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Support' ? ' -selected': '')" @tap="onNavigationItemTap(Support)">
+                        <Label col="0" text.decode="&#xf274;" class="nt-icon fas"></Label>
+                        <Label col="1" text="Support" class="p-r-10"></Label>
                     </GridLayout>
-        
+
+                    <StackLayout class="hr"></StackLayout>
+                    <StackLayout class="hr"></StackLayout>
+                    <StackLayout class="hr"></StackLayout>
                     <StackLayout class="hr"></StackLayout>
                     <StackLayout class="hr"></StackLayout>
 
-                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Settings' ? ' -selected': '')" @tap="onNavigationItemTap(Settings)">
-                        <Label col="0" text.decode="&#xf013;" class="nt-icon fas"></Label>
-                        <Label col="1" text="Settings" class="p-r-10"></Label>
+
+                    <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Home' ? ' -selected': '')" @tap="onNavigationItemTap(Home)">
+                        <Label col="0" text.decode="&#xf015;" class="nt-icon fas"></Label>
+                        <Label col="1" text="LogOut" class="p-r-10"></Label>
                     </GridLayout>
 
                 </StackLayout>
@@ -55,10 +55,12 @@
     import Featured from "./Featured";
     import Settings from "./Settings";
 
-    import Account from "./AccountForm";
-    import Payment from "./PaymentForm";
-    import Address from "./AddressForm";
+    import AccountList from "./AccountList";
+    import PaymentList from "./PaymentList";
+    import AddressList from "./AddressList";
     import JobHistory from "./JobHistory";
+    import Support from "./Support";
+
 
 
     import * as utils from "~/shared/utils";
@@ -73,28 +75,26 @@
             return {
                 Home: Home,
                 Featured: Featured,
-                Settings: Settings,
-                Account: Account,
-                Payment: Payment,
-                Address: Address,
+                AccountList: AccountList,
+                PaymentList: PaymentList,
+                AddressList: AddressList,
                 JobHistory: JobHistory,
-
-                selectedPage: ""
+                Support: Support,
+                selectedPage: "",
             };
         },
         components: {
             Home,
-            Featured,
-            Settings,
-            Account,
-            Payment,
-            Address,
+            AccountList,
+            PaymentList,
+            AddressList,
             JobHistory,
+            Support,
         },
         methods: {
             onNavigationItemTap(component) {
                 this.$navigateTo(component, {
-                    clearHistory: true
+                    //clearHistory: true
                 });
                 utils.closeDrawer();
             }
