@@ -1,6 +1,6 @@
 <template>
     <Page class="page">
-            <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*,*,*,*,*,*" class="page__content">       
+            <GridLayout columns="*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,*,auto,auto,auto,auto" class="page__content">       
                 <label row="0" class="formHeader" >Address Information: </label>                     
                 <TextField row="1" v-model="textFieldValue" hint="Property Nickname" class="formField form"/>
                 <TextField row="2" v-model="textFieldValue" hint="Street Address" class="formField form"/>

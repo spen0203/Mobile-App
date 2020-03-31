@@ -29,7 +29,7 @@
                         <Label col="1" text="Job History" class="p-r-10"></Label>
                     </GridLayout>
                     <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Support' ? ' -selected': '')" @tap="onNavigationItemTap(Support)">
-                        <Label col="0" text.decode="&#xf274;" class="nt-icon fas"></Label>
+                        <Label col="0" text.decode="&#xf095;" class="nt-icon fas"></Label>
                         <Label col="1" text="Support" class="p-r-10"></Label>
                     </GridLayout>
 
@@ -41,8 +41,8 @@
 
 
                     <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Home' ? ' -selected': '')" @tap="onNavigationItemTap(Home)">
-                        <Label col="0" text.decode="&#xf015;" class="nt-icon fas"></Label>
-                        <Label col="1" text="LogOut" class="p-r-10"></Label>
+                        <Label col="0" text.decode="&#xf506;" class="logOut nt-icon fas"></Label>
+                        <Label col="1" text="LogOut" class="logOut p-r-10"></Label>
                     </GridLayout>
 
                 </StackLayout>
@@ -93,9 +93,15 @@
         },
         methods: {
             onNavigationItemTap(component) {
-                this.$navigateTo(component, {
-                    //clearHistory: true
-                });
+                if(component == Home){
+                    console.log("Home clicked")
+                    this.$navigateTo(component, {
+                       clearHistory: true
+                    });
+                  }
+                  else{
+                    this.$navigateTo(component);
+                  }
                 utils.closeDrawer();
             }
         }
@@ -107,5 +113,9 @@
     @import '~@nativescript/theme/scss/variables/orange';
     // End custom common variables
 
+    .logOut {
+        color:red;
+        font-weight: 700;
+    }
     // Custom styles
 </style>

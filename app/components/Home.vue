@@ -4,7 +4,7 @@
           
                     <Image style="margin-bottom:50;" src="~/assets/StopGap-Logo.png"/>
                     <Label   style="font-weight: 700; font-size: 20; padding-left:30px;" > Login </Label>
-                    <TextField  v-model="textFieldValue" hint="Username" class="loginForm" />
+                    <TextField  v-model="textFieldValue" hint="Email" class="loginForm" />
                     <TextField v-model="textFieldValue" hint="Password" class="loginForm" />
                     <Button text="Login" @tap="loginButtonTap" />                   
                   <GridLayout columns="*,*">
