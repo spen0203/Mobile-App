@@ -4,7 +4,7 @@
           
                     <Image style="margin-bottom:50;" src="~/assets/StopGap-Logo.png"/>
                     <Label   style="font-weight: 700; font-size: 20; padding-left:30px;" > Login </Label>
-                    <ListView fir="msg in emailErrors"> <Label :text="msg" /> </ListView>
+                    <ListView for="msg in emailErrors"> <Label :text="msg" /> </ListView>
                     <TextField
                          v-model="Email" 
                          type="email" 
@@ -34,6 +34,7 @@
             return {
                 Email: null,
                 emailErrors: [],
+                msg: '',
             };
         },
         
@@ -53,14 +54,18 @@
             },
             loginButtonTap() {
                 console.log("Login Button was pressed");  
+                this.emailErrors = [];
                 this.$v.$touch();
                 if(this.$v.$invalid){
                     if(!this.$v.Email.required){
                         console.log("required");  
                         this.emailErrors.push("required");
-                    }
+                        console.log("required 2");  
 
-                    if(!this.$v.Email.email){
+                    }
+                        console.log("check");  
+
+                    if(!this.$v.email){
                       console.log("email");  
                         this.emailErrors.push("invalid email");
 
