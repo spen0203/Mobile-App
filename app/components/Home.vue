@@ -4,8 +4,8 @@
           
                     <Image style="margin-bottom:50;" src="~/assets/StopGap-Logo.png"/>
                     <Label   style="font-weight: 700; font-size: 20; padding-left:30px;" > Login </Label>
-                    <TextField  v-model="textFieldValue" hint="Email" class="loginForm" />
-                    <TextField v-model="textFieldValue" hint="Password" class="loginForm" />
+                    <TextField  v-model="Email" type="email" hint="Email" class="loginForm" />
+                    <TextField v-model="Password" type="password" hint="Password" class="loginForm" />
                     <Button text="Login" @tap="loginButtonTap" />                   
                   <GridLayout columns="*,*">
                     <Button  row="0" col="0" text="Register" @tap="registerButtonTap" />
@@ -31,6 +31,9 @@
             return {
                 RegisterType: RegisterType,
                 RequestService: RequestService,
+                Email: null,
+                Password: null,
+                loginErrors: [],
                 selectedPage: ""
             };
         },
@@ -44,8 +47,27 @@
                 console.log("Button was pressed");                         
             },
             loginButtonTap() {
-                console.log("Login Button was pressed");    
-                this.$navigateTo(RequestService);                    
+                console.log("Login Button was pressed");  
+                if(this.Email && this.Password){
+                        /*var emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;              
+                        if(emailRegEx.test(email)){
+                            this.loginErrors.push('Email Invalid!')
+                        } */
+                                               this.$navigateTo(RequestService);       
+                           // this.$navigateTo(RequestService);       
+                           
+                }
+                else{
+                    if(!this.Email){
+                        this.loginErrors.push('Email Required!')
+                    }
+                    if(!this.Password){
+                        this.loginErrors.push('Password Required!')
+                    }
+
+                    console.log("Login Error");  
+
+                }  
             },
             registerButtonTap() {
                 console.log("Register Button was pressed");    
