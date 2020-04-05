@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import DrawerContent from "./components/DrawerContent";
 import Vuex from 'vuex';
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
-import Vuelidate from "vuelidate";
+
 Vue.use(RadSideDrawer);
 Vue.use(Vuex);
 Vue.use(Vuelidate);

@@ -4,8 +4,21 @@
           
                     <Image style="margin-bottom:50;" src="~/assets/StopGap-Logo.png"/>
                     <Label   style="font-weight: 700; font-size: 20; padding-left:30px;" > Login </Label>
-                    <TextField  v-model="Email" type="email" hint="Email" class="loginForm" />
-                    <TextField v-model="Password" type="password" hint="Password" class="loginForm" />
+                    <TextField
+                         v-model="Email" 
+                         type="email" 
+                         hint="Email" 
+                         class="loginForm"
+                       
+                    />
+
+                    <TextField 
+                        v-model="Password" 
+                        type="password" 
+                        hint="Password" 
+                        class="loginForm" 
+                    />
+
                     <Button text="Login" @tap="loginButtonTap" />                   
                   <GridLayout columns="*,*">
                     <Button  row="0" col="0" text="Register" @tap="registerButtonTap" />
@@ -22,8 +35,10 @@
     import SelectedPageService from "../shared/selected-page-service";
     import RequestService from "./RequestService";
     import RegisterType from "./RegisterType";
+    import test from "./test";
 
-    export default {
+   
+   export default {
         mounted() {
             SelectedPageService.getInstance().updateSelectedPage("Home");
         },
@@ -31,16 +46,19 @@
             return {
                 RegisterType: RegisterType,
                 RequestService: RequestService,
+                test: test,
                 Email: null,
                 Password: null,
                 loginErrors: [],
                 selectedPage: ""
             };
         },
+        
         computed: {
             message() {
                 return "<!-- Page content goes here -->";
-            }
+            },
+            
         },
         methods: {
             onButtonTap() {
@@ -48,34 +66,20 @@
             },
             loginButtonTap() {
                 console.log("Login Button was pressed");  
-                if(this.Email && this.Password){
-                        /*var emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;              
-                        if(emailRegEx.test(email)){
-                            this.loginErrors.push('Email Invalid!')
-                        } */
-                                               this.$navigateTo(RequestService);       
-                           // this.$navigateTo(RequestService);       
-                           
-                }
-                else{
-                    if(!this.Email){
-                        this.loginErrors.push('Email Required!')
-                    }
-                    if(!this.Password){
-                        this.loginErrors.push('Password Required!')
-                    }
-
-                    console.log("Login Error");  
-
-                }  
+                
+                this.$navigateTo(RequestService);       
+                    
             },
             registerButtonTap() {
                 console.log("Register Button was pressed");    
                 this.$navigateTo(RegisterType);                           
             },
             forgotPasswordButtonTap() {
-                console.log("Forgot Password Button was pressed");                         
+                console.log("Forgot Password Button was pressed"); 
+                this.$navigateTo(test);                           
+
             }
+
 
             
         }
