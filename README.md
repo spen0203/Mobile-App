@@ -16,5 +16,17 @@ MapBox:
 https://www.mapbox.com/
 https://www.nativescript.org/blog/include-feature-rich-maps-in-a-nativescript-vue-app-with-mapbox
 
-Camera/Galler:
+Camera/Gallery:
 https://www.raymondcamden.com/2018/11/15/working-with-the-camera-in-a-nativescript-vue-app
+
+Vuelidate:
+https://vuelidate.js.org/#sub-basic-usage
+
+
+
+Things to be completed:
+- Request Services requires a bottom drawer to request service,
+- Phone and location needs validations
+- DataBase and Email Connections need setup
+- Firebase or AWS Cognito
+- T&C content required
