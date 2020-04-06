@@ -1,20 +1,21 @@
 <template>
     <Page class="page">
-        <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*" class="page__content">       
+        <GridLayout columns="*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">       
             <label row="0" class="formHeader" >Account Information: </label>                     
-            <TextField row="1" v-model="textFieldValue" hint="Email" class="formField form"/>
-            <TextField row="2" v-model="textFieldValue" hint="Password" class="formField  form"/>
-            <TextField row="3" v-model="textFieldValue" hint="Confirm Password" class="formField form"/>
-            <TextField row="4" v-model="textFieldValue" hint="First Name" class="formField form"/>
-            <TextField row="5" v-model="textFieldValue" hint="Last Name" class="formField form"/>
-            <TextField row="6" v-model="textFieldValue" hint="Phone Number" class="formField form"/>
+            <Label textWrap="true" row="1" v-if="formErrors"  style="color:red; font-weight: 700; font-size: 15; padding-left:30px;" >  {{formErrors.join(",")}}</Label>
 
-            <GridLayout row="7" columns="*,2*" rows="50">
-                <Switch row="0" col="0" checked="false" color="#505250" backgroundColor="#f68f25"  /> 
+            <TextField row="2" v-model="Email" hint="Email" class="formField form"/>
+            <TextField row="3" secure="true" v-model="Password" hint="Password" class="formField  form"/>
+            <TextField row="4" secure="true" v-model="confPassword" hint="Confirm Password" class="formField form"/>
+            <TextField row="5" v-model="firstName" hint="First Name" class="formField form"/>
+            <TextField row="6" v-model="lastName" hint="Last Name" class="formField form"/>
+            <TextField row="7" v-model="phone" hint="Phone Number" class="formField form"/>
+            <GridLayout row="8" columns="*,2*" rows="50">
+                <Switch row="0" col="0" v-model="tacChecked" color="#505250" backgroundColor="#f68f25"  /> 
                 <label row="0" col="1" class="formField" @tap="$navigateTo(TermsAndConditions);"> Agree To Terms and Conditions</label>
             </GridLayout>
 
-            <Button row="9" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
+            <Button row="10" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
 
 
         </GridLayout >
@@ -27,6 +28,7 @@
     import SelectedPageService from "../shared/selected-page-service";
     import AddressForm from "./AddressForm";
     import TermsAndConditions from "./TermsAndConditions";
+    import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 
     export default {
         mounted() {
@@ -36,8 +38,40 @@
             return {
                 AddressForm: AddressForm,
                 TermsAndConditions: TermsAndConditions,
+                formErrors: [],
+                Email: '',
+                Password: '',
+                confPassword: '',
+                firstName: '',
+                lastName: '',
+                phone: '',
+                tacChecked: false,
                 selectedPage: ""
             };
+        },
+        validations: {
+            Email: {
+                    required, email
+            },
+            Password: {
+                 required, sameAs
+             },
+             confPassword: {
+                 required, sameAsPassword: sameAs('Password')
+             },
+             firstName:{
+                 required
+             },
+             lastName:{
+                 required
+             },
+             phone: { // will need formated still
+                required
+             },
+             tacChecked: {
+                required
+             }
+
         },
         computed: {
             message() {
@@ -47,7 +81,50 @@
         methods: {
             continueButtonTap() {
                 console.log("Continue was pressed");   
-                this.$navigateTo(AddressForm);                    
+                this.formErrors = [];
+                this.$v.$touch();
+                if(this.$v.$invalid){
+                    if(!this.$v.Email.required){
+                        console.log("required");  
+                        this.formErrors.push("Email is required");
+                    }
+                     else if(!this.$v.Email.email){
+                      console.log("email");  
+                        this.formErrors.push("Email is invalid");
+                    }
+                    if(!this.$v.Password.required){
+                        this.formErrors.push("Password required");
+                    }
+                    if(!this.$v.confPassword.required){
+                        this.formErrors.push("Password Confirmation required");
+                    }
+                    else if(!this.$v.confPassword.sameAsPassword){
+                        this.formErrors.push("Passwords don't match");
+                    }
+
+                    if(!this.$v.firstName.required){
+                        this.formErrors.push("First name required");
+                    }
+                    if(!this.$v.lastName.required){
+                        this.formErrors.push("Last name required");
+                    }
+                    if(!this.$v.phone.required){
+                        this.formErrors.push("phone required");
+                    }
+                    else if(!this.$v.phone.)
+                     if(!this.tacChecked){
+                        this.formErrors.push("T&C required");
+                    }
+
+                    return
+                }
+              
+              
+              if(!this.tacChecked){
+                    this.formErrors.push("T&C required");
+                    return
+                }
+              this.$navigateTo(AddressForm);                    
              
             },
            

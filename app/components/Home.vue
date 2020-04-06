@@ -14,7 +14,7 @@
                        
                     />
 
-                    <TextField type="password" 
+                    <TextField secure="true" 
                         v-model="Password" 
                         hint="Password" 
                         class="loginForm" 
