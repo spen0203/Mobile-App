@@ -4,8 +4,22 @@
           
                     <Image style="margin-bottom:50;" src="~/assets/StopGap-Logo.png"/>
                     <Label   style="font-weight: 700; font-size: 20; padding-left:30px;" > Login </Label>
-                    <TextField  v-model="Email" type="email" hint="Email" class="loginForm" />
-                    <TextField v-model="Password" type="password" hint="Password" class="loginForm" />
+                    <Label textWrap="true" v-if="formErrors"  style="color:red; font-weight: 700; font-size: 15; padding-left:30px;" >  {{formErrors.join(",")}}</Label>
+
+                    <TextField
+                         v-model="Email" 
+                         type="email" 
+                         hint="Email" 
+                         class="loginForm"
+                       
+                    />
+
+                    <TextField secure="true" 
+                        v-model="Password" 
+                        hint="Password" 
+                        class="loginForm" 
+                    > </TextField>
+
                     <Button text="Login" @tap="loginButtonTap" />                   
                   <GridLayout columns="*,*">
                     <Button  row="0" col="0" text="Register" @tap="registerButtonTap" />
@@ -22,8 +36,10 @@
     import SelectedPageService from "../shared/selected-page-service";
     import RequestService from "./RequestService";
     import RegisterType from "./RegisterType";
+    import { required, email } from "vuelidate/lib/validators";
 
-    export default {
+   
+   export default {
         mounted() {
             SelectedPageService.getInstance().updateSelectedPage("Home");
         },
@@ -33,14 +49,22 @@
                 RequestService: RequestService,
                 Email: null,
                 Password: null,
-                loginErrors: [],
+                 formErrors: [],
+                msg: '',
                 selectedPage: ""
             };
         },
+        validations: {
+            Email: {
+                    required, email
+            },
+            Password: {
+                 required
+             }
+
+        },
         computed: {
-            message() {
-                return "<!-- Page content goes here -->";
-            }
+                        
         },
         methods: {
             onButtonTap() {
@@ -48,34 +72,41 @@
             },
             loginButtonTap() {
                 console.log("Login Button was pressed");  
-                if(this.Email && this.Password){
-                        /*var emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;              
-                        if(emailRegEx.test(email)){
-                            this.loginErrors.push('Email Invalid!')
-                        } */
-                                               this.$navigateTo(RequestService);       
-                           // this.$navigateTo(RequestService);       
-                           
-                }
-                else{
-                    if(!this.Email){
-                        this.loginErrors.push('Email Required!')
+                this.formErrors = [];
+                this.$v.$touch();
+                if(this.$v.$invalid){
+                    if(!this.$v.Email.required){
+                        console.log("required");  
+                        this.formErrors.push("Email is required");
+
                     }
-                    if(!this.Password){
-                        this.loginErrors.push('Password Required!')
+                    else if(!this.$v.email){
+                      console.log("email");  
+                        this.formErrors.push("Email is invalid");
+
+                    }
+                    if(!this.$v.Password.required){
+
+                        this.formErrors.push("Password required");
+
                     }
 
-                    console.log("Login Error");  
-
-                }  
+                    return
+                }// end error handling
+                
+                this.$navigateTo(RequestService);       
+                  
             },
             registerButtonTap() {
                 console.log("Register Button was pressed");    
                 this.$navigateTo(RegisterType);                           
             },
             forgotPasswordButtonTap() {
-                console.log("Forgot Password Button was pressed");                         
+                console.log("Forgot Password Button was pressed"); 
+               // this.$navigateTo();                           
+
             }
+
 
             
         }
