@@ -111,7 +111,6 @@
                     if(!this.$v.phone.required){
                         this.formErrors.push("phone required");
                     }
-                    else if(!this.$v.phone.)
                      if(!this.tacChecked){
                         this.formErrors.push("T&C required");
                     }
