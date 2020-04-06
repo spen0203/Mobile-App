@@ -48,7 +48,7 @@
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
     import RequestService from "./RequestService";
-    import { required} from "vuelidate/lib/validators";
+    import { required, requiredIf} from "vuelidate/lib/validators";
 
 
     export default {
@@ -93,21 +93,31 @@
                     required
             },
 
-
+            
             streetAddress: {
-                 required, 
+                 required: requiredIf(function(){ 
+                 return !this.useDefaultAddress;
+                 }), 
              },
              country: {
-                 required
+                 required: requiredIf(function(){ 
+                 return !this.useDefaultAddress;
+                 }), 
              },
              city:{
-                 required
+                 required: requiredIf(function(){ 
+                 return !this.useDefaultAddress;
+                 }),  
              },
              province:{
-                 required
+                  required: requiredIf(function(){ 
+                 return !this.useDefaultAddress;
+                 }), 
              },
              postalCode: { // will need formated still
-                required
+                required: requiredIf(function(){ 
+                 return !this.useDefaultAddress;
+                 }), 
              },
              
 
@@ -123,6 +133,8 @@
                 this.formErrors = [];
                 this.$v.$touch();
                 if(this.$v.$invalid){
+                                    console.log(" INVALID");   
+
                     if(!this.$v.payNickName.required){
                         this.formErrors.push("Nickname is required");
                     }
@@ -135,24 +147,26 @@
                     if(!this.$v.acctSecCode.required){
                         this.formErrors.push("Account Security Code is required");
                     }
-                    if(!this.$v.streetAddress.required){
-                        this.formErrors.push("Street Address is required");
+                  
+                    if(!this.useDefaultAddress){
+                        if(!this.$v.streetAddress.required){
+                            this.formErrors.push("Street Address is required");
+                        }
+                        if(!this.$v.country.required){
+                            this.formErrors.push("Country is required");
+                        }
+                        if(!this.$v.city.required){
+                            this.formErrors.push("City is required");
+                        }
+                        if(!this.$v.province.required){
+                            this.formErrors.push("Province is required");
+                        }
+                        if(!this.$v.postalCode.required){
+                            this.formErrors.push("Postal Code is required");
+                        }
                     }
-                    if(!this.$v.country.required){
-                        this.formErrors.push("Country is required");
-                    }
-                    if(!this.$v.city.required){
-                        this.formErrors.push("City is required");
-                    }
-                    if(!this.$v.province.required){
-                        this.formErrors.push("Province is required");
-                    }
-                    if(!this.$v.postalCode.required){
-                        this.formErrors.push("Postal Code is required");
-                    }
-                    
 
-                    return;
+                    return
                 }   
                 
                 this.$navigateTo(RequestService);                    

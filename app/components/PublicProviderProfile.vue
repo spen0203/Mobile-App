@@ -1,23 +1,25 @@
 <template>
     <Page class="page">
-        <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*,*" class="page__content">       
+        <GridLayout columns="*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">       
             <label row="0"  class="formHeader" >Bank Deposit Information: </label>                     
-            <TextField row="1" v-model="textFieldValue" hint="Account Number" class="formField form" />
-            <TextField row="2" v-model="textFieldValue" hint="Institution Number" class="formField form" />
-            <TextField row="3" v-model="textFieldValue" hint="Branch Number"  class="formField form"/>
+            <Label textWrap="true" row="1" v-if="formErrors"  style="color:red; font-weight: 700; font-size: 15; padding-left:30px;" >  {{formErrors.join(",")}}</Label>
+
+            <TextField row="2" v-model="acctNum" hint="Account Number" class="formField form" />
+            <TextField row="3" v-model="acctInstNum" hint="Institution Number" class="formField form" />
+            <TextField row="4" v-model="acctBranchNum" hint="Branch Number"  class="formField form"/>
  
-            <label row="5" class="formHeader" >Profile Photo: </label>                     
-            <GridLayout row="6" columns="*,*,*" rows="*">
+            <label row="6" class="formHeader" >Profile Photo: </label>                     
+            <GridLayout row="7" columns="*,*,*" rows="*">
                 <Image style="height:100; width:100;" column="1" class="nt-drawer__header-image fas  " dock="center" v-if="!img"  src.decode="font://&#xf2bd;" ></Image>
                 <Image column="1" dock="center" v-if="img" :src="img.src"  />
 			</GridLayout>
 
-            <GridLayout row="7" columns="*,*" rows="*">
+            <GridLayout row="8" columns="*,*" rows="*">
                     <Button row="0" col="0" text="Take Photo" @tap="takePicture" class="formField form" />
                     <Button row="0" col="1" text="Gallery" @tap="selectPicture" class="formField form" />
             </GridLayout>
 
-            <Button row="9" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
+            <Button row="10" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
 
 
         </GridLayout >
@@ -32,6 +34,7 @@
     import * as camera from "nativescript-camera";
     import * as imagepicker from "nativescript-imagepicker";
     import { Image } from "tns-core-modules/ui/image";
+    import { required } from "vuelidate/lib/validators";
 
     export default {
         mounted() {
@@ -41,9 +44,28 @@
             return {
                 Home: Home,
                 selectedPage: "",
+                formErrors: [],
                 img: null,
-
+                acctNum: '',
+                acctInstNum: '',
+                acctBranchNum: '',
             };
+        },
+        validations: {
+            acctNum: {
+                    required, 
+            },
+            acctInstNum: {
+                    required, 
+            },
+            acctBranchNum: {
+                    required, 
+            },
+            img: {
+                    required, 
+            },
+           
+
         },
         computed: {
             message() {
@@ -60,8 +82,35 @@
                 console.log("Gallery was pressed");   
             },
             continueButtonTap() {
-                console.log("Save was pressed");   
+                console.log("Continue was pressed");   
+                this.formErrors = [];
+                this.$v.$touch();
+                if(this.$v.$invalid){
+                    if(!this.$v.acctNum.required){
+                        console.log("required");  
+                        this.formErrors.push("Account Number is required");
+                    }
+                    if(!this.$v.acctInstNum.required){
+                        console.log("required");  
+                       this.formErrors.push("Institution Number Required");
+                    }
+                    if(!this.$v.acctBranchNum.required){
+                        console.log("required");  
+                       this.formErrors.push("Branch Number Required");
+                    }
+                    if(!this.$v.img.required){
+                        console.log("required");  
+                        this.formErrors.push("Profile Image Required");
+                    }
+                     
+
+                    return
+                }   
+
                 this.$navigateTo(Home);        
+            
+        
+            
             },
             selectPicture() {
 

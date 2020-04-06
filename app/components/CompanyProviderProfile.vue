@@ -1,9 +1,11 @@
 <template>
     <Page class="page">
-            <GridLayout columns="*" rows="*,*,*,*,*,*,*,*,*,*,*,*" class="page__content">       
+            <GridLayout columns="*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">       
                 <label row="0" class="formHeader" >Corporation Information: </label>                     
-                <TextField row="1" v-model="textFieldValue" hint="License Number" class="formField form"/>
-                <TextField row="2" v-model="textFieldValue" hint="Company Name" class="formField form"/>
+                <Label textWrap="true" row="1" v-if="formErrors"  style="color:red; font-weight: 700; font-size: 15; padding-left:30px;" >  {{formErrors.join(",")}}</Label>
+
+                <TextField row="2" v-model="licenseNum" hint="License Number" class="formField form"/>
+                <TextField row="3" v-model="compName" hint="Company Name" class="formField form"/>
     
             
 
@@ -31,6 +33,7 @@
     import * as camera from "nativescript-camera";
     import * as imagepicker from "nativescript-imagepicker";
     import { Image } from "tns-core-modules/ui/image";
+    import { required } from "vuelidate/lib/validators";
 
     export default {
         mounted() {
@@ -40,9 +43,29 @@
             return {
                 Home: Home,
                 selectedPage: "",
+              
+               formErrors: [],
+
+
                 img: null,
+                licenseNum: '',
+                compName: '',
+
 
             };
+        },
+        validations: {
+            licenseNum: {
+                    required, 
+            },
+            compName: {
+                    required, 
+            },
+            img: {
+                    required, 
+            },
+           
+
         },
         computed: {
             message() {
@@ -59,8 +82,29 @@
                 console.log("Gallery was pressed");   
             },
             continueButtonTap() {
-                console.log("Save was pressed");   
-               // this.$navigateTo(Home);        
+                console.log("Continue was pressed");   
+                this.formErrors = [];
+                this.$v.$touch();
+                if(this.$v.$invalid){
+                    if(!this.$v.licenseNum.required){
+                        console.log("required");  
+                        this.formErrors.push("License Number is required");
+                    }
+                    if(!this.$v.compName.required){
+                        console.log("required");  
+                       this.formErrors.push("Company Name Required");
+                    }
+                    if(!this.$v.img.required){
+                        console.log("required");  
+                        this.formErrors.push("Profile Image Required");
+                    }
+                     
+
+                    return
+                }   
+                
+                
+                // this.$navigateTo(Home);        
             },
             selectPicture() {
 
