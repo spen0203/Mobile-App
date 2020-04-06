@@ -96,7 +96,7 @@
                         this.formErrors.push("Nickname is required");
                     }
                     if(!this.$v.streetAddress.required){
-                        this.formErrors.push("Stree Address is required");
+                        this.formErrors.push("Street Address is required");
                     }
                     if(!this.$v.country.required){
                         this.formErrors.push("Country is required");
