@@ -36,6 +36,7 @@
     import SelectedPageService from "../shared/selected-page-service";
     import RequestService from "./RequestService";
     import RegisterType from "./RegisterType";
+    import test from "./test";
     import { required, email } from "vuelidate/lib/validators";
 
    
@@ -47,6 +48,7 @@
             return {
                 RegisterType: RegisterType,
                 RequestService: RequestService,
+                test: test,
                 Email: null,
                 Password: null,
                  formErrors: [],
@@ -103,7 +105,7 @@
             },
             forgotPasswordButtonTap() {
                 console.log("Forgot Password Button was pressed"); 
-               // this.$navigateTo();                           
+                this.$navigateTo(test);                           
 
             }
 
