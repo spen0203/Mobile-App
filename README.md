@@ -30,3 +30,9 @@ Things to be completed:
 - DataBase and Email Connections need setup
 - Firebase or AWS Cognito
 - T&C content required
+
+- Geocoding needs added to ensure addresses are accurate and appear on the map
+https://market.nativescript.org/plugins/nativescript-geocoding
+
+
+
