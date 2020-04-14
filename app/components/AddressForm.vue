@@ -1,141 +1,92 @@
 <template>
     <Page class="page">
-        <ScrollView>
-            <GridLayout columns="*" rows="auto, auto, auto,auto,auto,auto,auto,auto,auto,auto,*,auto,auto,auto,auto" class="page__content">       
-                <label row="0" class="formHeader" >Address Information: </label> 
-                <Label textWrap="true" row="1" v-if="formErrors"  style="color:red; font-weight: 700; font-size: 15; padding-left:30px;" >  {{formErrors.join(",")}}</Label>
-
-                <TextField row="2" v-model="nickname" hint="Property Nickname" class="formField form"/>
-                <TextField row="3" v-model="streetAddress" hint="Street Address" class="formField form"/>
-                <TextField row="4" v-model="country" hint="Country" class="formField form" />
-                <TextField row="5" v-model="city" hint="City" class="formField form"/>
-                <TextField row="6" v-model="province" hint="Province" class="formField form"/>
-                <TextField row="7" v-model="postalCode" hint="Postal Code" class="formField form" />
-                <label row="8" class="formHeader" >Notes: </label>                     
-                <TextView row="9" editable="true" v-model="notes" hint="Enter any extra notes about your property." class="formField form" >
-
-                </TextView>
-
-                    <label row="11" class="formHeader" >Home Details: </label>                     
-
-                <GridLayout row="12" columns="*,2*" rows="50">
-                    <Switch row="0" col="0" checked="false" color="#505250" backgroundColor="#f68f25"  /> 
-                    <label row="0" col="1" class="formField" > Default Address</label>
-                </GridLayout>
-
-                <Button row="14" style="color:white; background-color:green; font-weight:800; border-radius:15px;" text="Continue" @tap="continueButtonTap" />                   
+             
 
 
-            </GridLayout >
-        </ScrollView>
 
+
+
+                <DockLayout  stretchLastChild="true" class="page__content">                            
+                    <StackLayout dock="top" class="page">
+                        <SearchBar hint="Location search string" v-model="searchString" @clear="SearchBarClear()"  @submit="onSubmit()"></SearchBar>
+                        <Label :text="`Latitude: ${latitude}`"/>
+                        <Label :text="`Longitude: ${longitude}`"/>
+                    </StackLayout>
+                    <Button dock="bottom" style="color:white; background-color:red; font-weight:800; border-radius:15px;" text="Add address"  />                   
+
+                    <Mapbox 
+                        accessToken="pk.eyJ1IjoicGxheWVyM2MiLCJhIjoiY2s4YWhsdnBhMGkxcTNrcG02YjkwZHZteCJ9.rOMXwXk61oEJ3oEhfHVwkw"
+                        mapStyle="traffic_day"
+                        :latitude="latitude" 
+                        :longitude="longitude"
+                        hideCompass="true"
+                        zoomLevel="15"
+                        showUserLocation="false"
+                        disableZoom="false"
+                        disableRotation="false"
+                        disableScroll="false"
+                        disableTilt="false" 
+                        attributionControl="false"
+                        hideAttribution="true"
+                        dock="center"
+                        @mapReady="onMapReady($event)"
+                        v-if="this.latitude"
+                        />    
+
+                         
+        </DockLayout>
+                          
     </Page>
-
 </template>
 
 <script>
+    import * as geocoding from "nativescript-geocoding";
+    import { Accuracy } from "tns-core-modules/ui/enums";
     import * as utils from "~/shared/utils";
-    import SelectedPageService from "../shared/selected-page-service";
-    import PaymentForm from "./PaymentForm";
-    import { required } from "vuelidate/lib/validators";
-
     export default {
-        mounted() {
-            SelectedPageService.getInstance().updateSelectedPage("AddressForm");
-        },
-        data () {
+        data() {
             return {
-                PaymentForm: PaymentForm,
-                formErrors: [],
-                nickname: '', 
-                streetAddress: '', 
-                country: '', 
-                city: '',
-                province: '', 
-                postalCode: '', 
-                notes: '', 
-                defaultAddress: false,
-
-                selectedPage: ""
-            };
-        },
-        validations: {
-            nickname: {
-                    required
-            },
-            streetAddress: {
-                 required, 
-             },
-             country: {
-                 required
-             },
-             city:{
-                 required
-             },
-             province:{
-                 required
-             },
-             postalCode: { // will need formated still
-                required
-             },
-             
-
-        },
-        computed: {
-            message() {
-                return "<!-- Page content goes here -->";
+                searchString: '',
+                    latitude: '',
+                    longitude: '',
             }
         },
         methods: {
-            continueButtonTap() {
-                console.log("Continue was pressed");   
-                this.formErrors = [];
-                this.$v.$touch();
-                if(this.$v.$invalid){
-                    if(!this.$v.nickname.required){
-                        this.formErrors.push("Nickname is required");
-                    }
-                    if(!this.$v.streetAddress.required){
-                        this.formErrors.push("Street Address is required");
-                    }
-                    if(!this.$v.country.required){
-                        this.formErrors.push("Country is required");
-                    }
-                    if(!this.$v.city.required){
-                        this.formErrors.push("City is required");
-                    }
-                    if(!this.$v.province.required){
-                        this.formErrors.push("Province is required");
-                    }
-                    if(!this.$v.postalCode.required){
-                        this.formErrors.push("Postal Code is required");
-                    }
-                    
-
-                    return;
-                }
-                this.$navigateTo(PaymentForm);                    
-             
+            onSubmit(){
+                this.longitude = '';
+                this.latitude = '';
+                console.log("search: " + this.searchString);
+                var geocoding = require("nativescript-geocoding");
+                geocoding.getLocationFromName(this.searchString).then(loc => {
+                    console.log('Found ', loc);
+                    this.longitude = loc.longitude;
+                    this.latitude = loc.latitude;
+                    console.log('long ', this.longitude);
+                    console.log('lati ', this.latitude);
+                    mapbox.setCenter([this.longitude, this.latitude], {animated: true});                   
+                
+                }, function (e) {
+                    console.log("Error: " + (e.message || e));
+                });
+            },           
+            SearchBarClear() {
+                this.searchString = '';
+                this.longitude = '';
+                this.latitude = '';
             },
-           
-            
+            onMapReady(args) {
+                args.map.addMarkers([
+                    {
+                        lat: this.latitude,
+                        lng: this.longitude,
+                        title: "Selected",
+                        
+                    }
+                ]);
+            }      
         }
     };
 </script>
 
 <style scoped lang="scss">
-    // Start custom common variables
-    @import '~@nativescript/theme/scss/variables/blue';
-    // End custom common variables
-
-    .formHeader {
-        font-weight: 700; 
-        font-size: 20;
-    }
-
-    .formField {
-        font-size:15;
-        font-weight:500;
-    }
-    // Custom styles
 </style>

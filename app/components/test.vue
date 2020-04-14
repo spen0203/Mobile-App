@@ -1,95 +1,92 @@
 <template>
     <Page class="page">
-             
+                        <ActionBar class="action-bar">
+                            <!-- 
+                            Use the NavigationButton as a side-drawer button in Android
+                            because ActionItems are shown on the right side of the ActionBar
+                            -->
+                            <NavigationButton ios:visibility="collapsed" icon="res://menu" @tap="onDrawerButtonTap"></NavigationButton>
+                            <!-- 
+                            Use the ActionItem for IOS with position set to left. Using the
+                            NavigationButton as a side-drawer button in iOS is not possible,
+                            because its function is to always navigate back in the application.
+                            -->
+                            <ActionItem icon="res://menu" 
+                                android:visibility="collapsed" 
+                                @tap="onDrawerButtonTap"
+                                ios.position="left">
+                            </ActionItem>
+                            <Label class="action-bar-title" text="StopGapTPM"></Label>
+                        </ActionBar> 
+                    <MultiDrawer v-model="drawerState" class="page__content" >
+                        <StackLayout slot="bottom">
+                            <Button style="color:red;  font-weight:800; " text="X" @tap="onSubmit" />                   
+
+                            <Label text="Im in the bottom drawer" />  
+                                           </StackLayout>
+
+                        <DockLayout stretchLastChild="true" class="page__content">                            
+                                    
+                                    <Button dock="bottom" style="color:white; background-color:red; font-weight:800; border-radius:15px;" text="Request Service" @tap="onSubmit" />                   
+
+                                    
+
+                                    <Mapbox 
+                                        accessToken="pk.eyJ1IjoicGxheWVyM2MiLCJhIjoiY2s4YWhsdnBhMGkxcTNrcG02YjkwZHZteCJ9.rOMXwXk61oEJ3oEhfHVwkw"
+                                        mapStyle="traffic_day"
+                                        latitude="45.382750"
+                                        longitude="-75.693839"
+                                        hideCompass="true"
+                                        zoomLevel="9"
+                                        showUserLocation="false"
+                                        disableZoom="false"
+                                        disableRotation="false"
+                                        disableScroll="false"
+                                        disableTilt="false" 
+                                        attributionControl="false"
+                                        dock="center"
+                                        />
+
+                                    
+                                        
+                            
+                        </DockLayout>
 
 
-
-
-
-                <DockLayout  stretchLastChild="true" class="page__content">                            
-                    <StackLayout dock="top" class="page">
-                        <SearchBar hint="Location search string" v-model="searchString" @clear="SearchBarClear()"  @submit="onSubmit()"></SearchBar>
-                        <Label :text="`Latitude: ${latitude}`"/>
-                        <Label :text="`Longitude: ${longitude}`"/>
-                    </StackLayout>
-                    <Button dock="bottom" style="color:white; background-color:red; font-weight:800; border-radius:15px;" text="Add address"  />                   
-
-                    <Mapbox 
-                        accessToken="pk.eyJ1IjoicGxheWVyM2MiLCJhIjoiY2s4YWhsdnBhMGkxcTNrcG02YjkwZHZteCJ9.rOMXwXk61oEJ3oEhfHVwkw"
-                        mapStyle="traffic_day"
-                        :latitude="latitude" 
-                        :longitude="longitude"
-                        hideCompass="true"
-                        zoomLevel="15"
-                        showUserLocation="false"
-                        disableZoom="false"
-                        disableRotation="false"
-                        disableScroll="false"
-                        disableTilt="false" 
-                        attributionControl="false"
-                        hideAttribution="true"
-                        dock="center"
-                        @mapReady="onMapReady($event)"
-                        v-if="this.latitude"
-                        />    
-
-                         
-        </DockLayout>
-                          
+                    </MultiDrawer>                      
     </Page>
 </template>
 
 <script>
     import * as geocoding from "nativescript-geocoding";
     import { Accuracy } from "tns-core-modules/ui/enums";
+    import SelectedPageService from "../shared/selected-page-service";
+
     import * as utils from "~/shared/utils";
 
-    export default {
+export default {
+    mounted() {
+            SelectedPageService.getInstance().updateSelectedPage("test");
+        },
         data() {
             return {
-                searchString: '',
-                    latitude: '',
-                    longitude: '',
+              drawerState: false  
             }
         },
         methods: {
             onSubmit(){
-                this.longitude = '';
-                this.latitude = '';
-                console.log("search: " + this.searchString);
-                var geocoding = require("nativescript-geocoding");
-                geocoding.getLocationFromName(this.searchString).then(loc => {
-                    console.log('Found ', loc);
-                    this.longitude = loc.longitude;
-                    this.latitude = loc.latitude;
-                    console.log('long ', this.longitude);
-                    console.log('lati ', this.latitude);
-                    mapbox.setCenter([this.longitude, this.latitude], {animated: true});                   
-                
-                }, function (e) {
-                    console.log("Error: " + (e.message || e));
-                });
-
-            },           
-            SearchBarClear() {
-                this.searchString = '';
-                this.longitude = '';
-                this.latitude = '';
+                if(!this.drawerState){
+                   this.drawerState = 'bottom'; // this will open the left drawer
+                }else{
+                this.drawerState = false; // this will open the left drawer
+                }
             },
-            onMapReady(args) {
-                args.map.addMarkers([
-                    {
-                        lat: this.latitude,
-                        lng: this.longitude,
-                        title: "Selected",
-                        
-                    }
-                ]);
-            }      
+            onDrawerButtonTap() {
+                utils.showDrawer();
+            },         
         }
     };
 </script>
 
 <style scoped lang="scss">
-
 </style>

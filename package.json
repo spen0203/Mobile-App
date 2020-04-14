@@ -19,6 +19,7 @@
     "nativescript-mapbox": "^4.4.1",
     "nativescript-ui-sidedrawer": "~8.0.0",
     "nativescript-vue": "~2.5.0",
+    "nativescript-vue-multi-drawer": "0.0.2",
     "rxjs": "^6.4.0",
     "tns-core-modules": "~6.5.0",
     "vuelidate": "^0.7.5",
