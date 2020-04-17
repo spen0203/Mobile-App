@@ -20,7 +20,7 @@
                         :latitude="latitude" 
                         :longitude="longitude"
                         hideCompass="true"
-                        zoomLevel="15"
+                        zoomLevel="9"
                         showUserLocation="false"
                         disableZoom="false"
                         disableRotation="false"
@@ -29,7 +29,6 @@
                         attributionControl="false"
                         hideAttribution="true"
                         dock="center"
-                        @mapReady="onMapReady($event)"
                         v-if="this.latitude"
                         />    
 
@@ -55,6 +54,7 @@
             onSubmit(){
                 this.longitude = '';
                 this.latitude = '';
+                this.searchString = '';
                 console.log("search: " + this.searchString);
                 var geocoding = require("nativescript-geocoding");
                 geocoding.getLocationFromName(this.searchString).then(loc => {
@@ -63,7 +63,7 @@
                     this.latitude = loc.latitude;
                     console.log('long ', this.longitude);
                     console.log('lati ', this.latitude);
-                    mapbox.setCenter([this.longitude, this.latitude], {animated: true});                   
+                    mapbox.setCenter([this.longitude, this.latitude], {animated: false});                   
                 
                 }, function (e) {
                     console.log("Error: " + (e.message || e));
@@ -78,7 +78,7 @@
                 args.map.addMarkers([
                     {
                         lat: this.latitude,
-                        lng: this.longitude,
+                        lon: this.longitude,
                         title: "Selected",
                         
                     }

@@ -25,6 +25,8 @@
                                     <StackLayout col="1">
                                     <Button style="color:red;  font-weight:800; " text="X Close" @tap="onSubmit" />                   
 
+                                    <Label textWrap="true" row="1" v-if="formErrors"  style="color:red; font-weight: 700; font-size: 15; padding-left:30px;" >  {{formErrors.join(",")}}</Label>
+
                                     <Label text="Service Request info will go here, list picker of address, time,  list picker payment, confirm" />  
                                         
                                     
@@ -32,7 +34,7 @@
                                         <Label text="MM/DD/Y" col="0" row="0" class="Header"/>
                                         <Label text="Time:" col="1" row="0" class="Header"/>
 
-                                        <DatePicker minDate="`${currentDate}`" date="`${currentDate}`" col="0" row="1" v-model="selectedDate"/>
+                                        <DatePicker :minDate="Date()" :date="Date()" col="0" row="1" v-model="selectedDate"/>
                                         <TimePicker col="1" row="1" v-model="selectedTime"/>
                                     </GridLayout>
                                     <Label text="Address to service:" col="1" row="0" class="Header"/>
@@ -87,6 +89,7 @@
     import * as geocoding from "nativescript-geocoding";
     import { Accuracy } from "tns-core-modules/ui/enums";
     import SelectedPageService from "../shared/selected-page-service";
+    import { required} from "vuelidate/lib/validators";
 
     import * as utils from "~/shared/utils";
 
@@ -96,6 +99,7 @@ export default {
         },
         data() {
             return {
+                formErrors: [],
               drawerState: false,
               selectedDate: '',
               selectedTime: '',
@@ -108,6 +112,21 @@ export default {
             };
                
         },
+        validations: {
+            selectedDate: {
+                    required
+            },
+            selectedTime: {
+                    required
+            },
+            selectedPayment: {
+                    required
+            },
+            selectedAddress: {
+                    required
+            },
+           
+        },     
         methods: {
             onSubmit(){
                 if(!this.drawerState){
@@ -120,6 +139,28 @@ export default {
                 utils.showDrawer();
             },    
             ConfirmRequest() {
+                this.formErrors = [];
+                this.$v.$touch();
+                if(this.$v.$invalid){
+                    if(!this.$v.selectedDate.required){
+                        console.log("required");  
+                        this.formErrors.push("Date is required");
+                    }
+                    if(!this.$v.selectedTime.required){
+                        console.log("required");  
+                        this.formErrors.push("Time is required");
+                    }
+                    if(!this.$v.selectedAddress.required){
+                        console.log("required");  
+                        this.formErrors.push("Address is required");
+                    }
+                    if(!this.$v.selectedPayment.required){
+                        console.log("required");  
+                        this.formErrors.push("Payment is required");
+                    }
+                    
+
+                }
                 //will have to open modal to confirm again
                 console.log("confirm request");
                 confirm({

@@ -70,7 +70,14 @@ export default {
         },
         data() {
             return {
-              drawerState: false  
+              drawerState: false,
+              listOfAdress: [ 'item1', 'item2' ],
+              listOfPayment: [ 'item1', 'item2' ],
+              selectedAddress: '',
+              selectedPayment: '',
+
+
+
             }
         },
         methods: {
