@@ -38,13 +38,15 @@ https://vuelidate.js.org/#sub-basic-usage
 
 
 <h2> Things to be completed: </h2>
-- Backend Created
-- Phone needs validations
-- DataBase and Email Connections need setup
-- Firebase or AWS Cognito
-- T&C content required
-- Stripe
-- lots of UI updates and tweaks
+<ul>
+<li> Backend Created </li>
+<li> DataBase and Email Connections need setup </li>
+<li> Firebase or AWS Cognito </li>
+<li> Phone needs validations </li>
+<li> T&C content required </li>
+<li> Stripe </li>
+<li> lots of UI updates and tweaks </li>
+
 
 <h2> Images </h2>
 <h3> Address Form </h3>
