@@ -41,7 +41,7 @@
             };
         },
         mounted() {
-            axios({ method: "GET", "url": "https://pokeapi.co/api/v2/pokemon/?limit=10" }).then(result => {
+            axios({ method: "GET", "url": "https://pokeapi.co/api/v2/pokemon/?limit=50" }).then(result => {
                 this.pokemon = result.data.results;
             }, error => {
                 console.error(error);
