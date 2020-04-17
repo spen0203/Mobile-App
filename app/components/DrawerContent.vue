@@ -1,6 +1,9 @@
 <template lang="html">
 <GridLayout rows="auto, *" class="nt-drawer__content">
             <StackLayout row="0" class="nt-drawer__header">
+                <GridLayout columns="*" :class="'nt-drawer__list-item' + (selectedPage === 'X' ? ' -selected': '')" @tap="onNavigationItemTap(RequestService)">
+                        <Label col="1" text="X" class="p-r-10"></Label>
+                    </GridLayout>
                 <Image class="nt-drawer__header-image fas t-36" src.decode="font://&#xf2bd;"></Image>
                 <Label class="nt-drawer__header-brand" text="User Name"></Label>
                 <Label class="nt-drawer__header-footnote" text="username@mail.com"></Label>
@@ -37,7 +40,6 @@
                     <StackLayout class="hr"></StackLayout>
                     <StackLayout class="hr"></StackLayout>
                     <StackLayout class="hr"></StackLayout>
-                    <StackLayout class="hr"></StackLayout>
 
 
                     <GridLayout columns="auto, *" :class="'nt-drawer__list-item' + (selectedPage === 'Home' ? ' -selected': '')" @tap="onNavigationItemTap(Home)">
@@ -54,7 +56,7 @@
     import Home from "./Home";
     import Featured from "./Featured";
     import Settings from "./Settings";
-
+    import RequestService from "./RequestService";
     import AccountList from "./AccountList";
     import PaymentList from "./PaymentList";
     import AddressList from "./AddressList";
@@ -80,6 +82,7 @@
                 AddressList: AddressList,
                 JobHistory: JobHistory,
                 Support: Support,
+                RequestService: RequestService,
                 selectedPage: "",
             };
         },
@@ -90,6 +93,7 @@
             AddressList,
             JobHistory,
             Support,
+            RequestService,
         },
         methods: {
             onNavigationItemTap(component) {
@@ -103,7 +107,8 @@
                     this.$navigateTo(component);
                   }
                 utils.closeDrawer();
-            }
+            },
+            
         }
     };
 </script>

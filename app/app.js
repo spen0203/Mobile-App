@@ -6,6 +6,13 @@ import DrawerContent from "./components/DrawerContent";
 import Vuex from 'vuex';
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
 
+import MultiDrawer from 'nativescript-vue-multi-drawer';
+Vue.use(MultiDrawer, {
+  bottom:{
+  height: '70%' 
+  }
+ });
+ 
 Vue.use(RadSideDrawer);
 Vue.use(Vuex);
 Vue.use(Vuelidate);
