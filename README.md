@@ -3,9 +3,8 @@ Using NativeScript-Vue im looking to develop a service app for ios and andriod. 
 
 <h5>More images at the end of page or under "/Github Preview Images"<h5> 
 
-![](Github%20Preview%20Images/RequestService:Home.png)
+![](Github%20Preview%20Images/Login.png) ![](Github%20Preview%20Images/RequestService:Home.png)
 
-![](Github%20Preview%20Images/Login.png)
 
 
 <h2>System:</h2>
